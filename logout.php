@@ -2,6 +2,8 @@
 
 
 session_start();
-session_unset();
-session_destroy();
+// session_unset();
+unset($_SESSION['username']);
+
+// session_destroy();
 header("Location:/php_devsearch/login.php");

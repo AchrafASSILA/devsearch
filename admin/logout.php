@@ -2,6 +2,8 @@
 
 
 session_start();
-session_unset();
-session_destroy();
+// session_unset($_SESSION["username_admin"]);
+unset($_SESSION['username_admin']);
+
+// session_destroy();
 header("Location:/php_devsearch/admin/");
