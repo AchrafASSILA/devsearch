@@ -4,6 +4,8 @@
 
 <?php
 if (isset($_SESSION["username"])) {
+    $username = $_SESSION["username"];
+    $developer = getDeveloperSession($db, $username);
     if (isset($_POST["submit"])) {
 
         $first_name = $_POST["first_name"];
@@ -38,23 +40,23 @@ if (isset($_SESSION["username"])) {
                     <!-- Input:Text -->
                     <div class="form__field">
                         <label for="first_name">First Name: </label>
-                        <input class="input input--text" id="first_name" type="text" name="first_name" placeholder="Enter first name" />
+                        <input class="input input--text" id="first_name" value="<?php echo $developer->first_name ?>" type="text" name="first_name" placeholder="Enter first name" />
                     </div>
 
                     <!-- Input:Text -->
                     <div class="form__field">
                         <label for="last_name">Last Name: </label>
-                        <input class="input input--text" id="last_name" type="text" name="last_name" placeholder="Enter last name" />
+                        <input class="input input--text" id="last_name" value="<?php echo $developer->last_name ?>" type="text" name="last_name" placeholder="Enter last name" />
                     </div>
 
                     <!-- Input:Text -->
                     <div class="form__field">
                         <label for="bio">Bio: </label>
-                        <input class="input input--text" id="bio" type="text" name="bio" placeholder="Enter bio" />
+                        <input class="input input--text" id="bio" value="<?php echo $developer->bio ?>" type="text" name="bio" placeholder="Enter bio" />
                     </div>
                     <div class="form__field">
                         <label for="description">Description: </label>
-                        <textarea class="input input--text" id="description" type="text" name="description" placeholder="Enter description"></textarea>
+                        <textarea class="input input--text" id="description" type="text" name="description" placeholder="Enter description"><?php echo $developer->description ?></textarea>
                     </div>
                     <div class="form__field">
                         <label for="image">Image: </label>
@@ -62,19 +64,19 @@ if (isset($_SESSION["username"])) {
                     </div>
                     <div class="form__field">
                         <label for="email">Email: </label>
-                        <input class="input input--text" id="email" type="text" name="email" placeholder="Enter email" />
+                        <input class="input input--text" id="email" value="<?php echo $developer->email ?>" type="text" name="email" placeholder="Enter email" />
                     </div>
                     <div class="form__field">
                         <label for="github">Github: </label>
-                        <input class="input input--text" id="github" type="text" name="github" placeholder="Enter github" />
+                        <input class="input input--text" id="github" value="<?php echo $developer->github ?>" type="text" name="github" placeholder="Enter github" />
                     </div>
                     <div class="form__field">
                         <label for="linkedin">Linkedin: </label>
-                        <input class="input input--text" id="linkedin" type="text" name="linkedin" placeholder="Enter linkedin" />
+                        <input class="input input--text" id="linkedin" value="<?php echo $developer->linkedin ?>" type="text" name="linkedin" placeholder="Enter linkedin" />
                     </div>
                     <div class="form__field">
                         <label for="location">Location: </label>
-                        <input class="input input--text" id="location" type="text" name="location" placeholder="Enter location" />
+                        <input class="input input--text" id="location" value="<?php echo $developer->location ?>" type="text" name="location" placeholder="Enter location" />
                     </div>
                     <?php if (isset($_GET["error_empty"]) && !(empty($_GET["error_empty"]))) { ?>
 

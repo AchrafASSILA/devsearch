@@ -51,14 +51,44 @@ function updateProfile($db, $first_name, $last_name, $email, $bio, $description,
         if ($image_error === 0) {
             if ($image_size < 500000) {
                 if (move_uploaded_file($image_tmp, $image_location)) {
-                    $sql = "UPDATE developers SET bio = :bio, description = :description , image = :image WHERE username =:username ";
+                    $sql = "UPDATE developers SET first_name = :first_name , last_name = :last_name, email = :email,  image = :image ,github=:github,linkedin=:linkedin ,  bio = :bio, description = :description  WHERE username =:username ";
                     $statement = $db->prepare($sql);
-                    $statement->execute([":bio" => $bio, ":description" => $description, ":image" => $image_location, ":username" => $username]);
+                    $statement->execute([
+                        ":first_name" => $first_name,
+                        ":last_name" => $last_name,
+                        ":email" => $email,
+                        ":github" => $github,
+                        ":linkedin" => $linkedin,
+                        ":bio" => $bio,
+                        ":image" => $image_location,
+                        ":description" => $description,
+                        ":username" => $username
+                    ]);
                 }
             }
         }
     }
-    $sql = "UPDATE developers SET bio = :bio, description = :description  WHERE username =:username ";
+    $sql = "UPDATE developers SET first_name = :first_name , last_name = :last_name, email = :email,  github=:github,linkedin=:linkedin ,  bio = :bio, description = :description  WHERE username =:username ";
     $statement = $db->prepare($sql);
-    $statement->execute([":bio" => $bio, ":description" => $description, ":username" => $username]);
+    $statement->execute([
+        ":first_name" => $first_name,
+        ":last_name" => $last_name,
+        ":email" => $email,
+        ":github" => $github,
+        ":linkedin" => $linkedin,
+        ":bio" => $bio,
+        ":description" => $description,
+        ":username" => $username
+    ]);
+}
+
+
+function getDeveloperSkills($db, $owner)
+{
+    $skills  = "";
+    $sql = "SELECT * FROM skills WHERE owner = :owner ";
+    $statmenet = $db->prepare($sql);
+    $statmenet->execute([":owner" => $owner]);
+    $skills = $statmenet->fetchAll(PDO::FETCH_OBJ);
+    return $skills;
 }

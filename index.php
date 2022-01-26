@@ -43,25 +43,16 @@ $developers = getDevelopers($db);
                                 <p class="dev__info">
                                     <?php echo $developer->description ?>
                                 </p>
+                                <?php
+                                $owner = $developer->id;
+                                $skills = getDeveloperSkills($db, $owner);
+                                ?>
                                 <div class="dev__skills">
-                                    <span class="tag tag--pill tag--main">
-                                        <small>JavaScript</small>
-                                    </span>
-                                    <span class="tag tag--pill tag--main">
-                                        <small>React</small>
-                                    </span>
-                                    <span class="tag tag--pill tag--main">
-                                        <small>SCSS</small>
-                                    </span>
-                                    <span class="tag tag--pill tag--main">
-                                        <small>Nodejs</small>
-                                    </span>
-                                    <span class="tag tag--pill tag--main">
-                                        <small>Express</small>
-                                    </span>
-                                    <span class="tag tag--pill tag--main">
-                                        <small>GraphQL</small>
-                                    </span>
+                                    <?php foreach ($skills as $skill) : ?>
+                                        <span class="tag tag--pill tag--main">
+                                            <small><?php echo $skill->name ?></small>
+                                        </span>
+                                    <?php endforeach; ?>
                                 </div>
                             </a>
                         </div>
