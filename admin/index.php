@@ -1,5 +1,5 @@
 <?php
-require_once('./functions/admin.funcs.php');
+require_once('../functions/admin.funcs.php');
 if (isset($_POST["submit"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -10,7 +10,7 @@ if (isset($_POST["submit"])) {
     $admin = getAdmin($username);
     if ($admin) {
         session_start();
-        $_SESSION["username"] = $username;
+        $_SESSION["username_admin"] = $username;
         header("Location:/php_devsearch/admin/admin.php");
     } else {
         header("Location:/php_devsearch/admin/index.php?error_none=username or password not correct");
@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
 }
 ?>
 <?php session_start();
-if (isset($_SESSION["username"])) {
+if (isset($_SESSION["username_admin"])) {
     header("Location:/php_devsearch/admin/admin.php");
 ?>
 <?php } else {
@@ -33,13 +33,13 @@ if (isset($_SESSION["username"])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="../public/images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon" />
         <!-- Icon - IconMonster -->
         <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css" />
         <!-- Mumble UI -->
-        <link rel="stylesheet" href="../public/uikit/styles/uikit.css" />
+        <link rel="stylesheet" href="../static/uikit/styles/uikit.css" />
         <!-- Dev Search UI -->
-        <link rel="stylesheet" href="../public/styles/app.css" />
+        <link rel="stylesheet" href="../static/styles/app.css" />
 
         <title>DevSearch - Connect with Developers!</title>
     </head>
@@ -49,7 +49,7 @@ if (isset($_SESSION["username"])) {
             <div class="card">
                 <div class="auth__header text-center">
                     <a href="/">
-                        <img src="../public/images/icon.svg" alt="icon" />
+                        <img src="../static/images/icon.svg" alt="icon" />
                     </a>
                     <h3>Admin Login</h3>
                     <p>Hello Admin, Welcome Back!</p>

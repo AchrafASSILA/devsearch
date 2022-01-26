@@ -16,24 +16,21 @@
                             <a class="tag tag--pill tag--main settings__btn" href="update-profile.php"><i class="im im-edit"></i> Edit</a>
                             <img class="avatar avatar--xl dev__avatar" src="<?php echo $developer->image ?>" />
                             <h2 class="dev__name"><?php echo $developer->first_name    . " " . $developer->last_name ?></h2>
-                            <p class="dev__title">Expirance FullStack Developer, Youtuber and Instructor</p>
-                            <p class="dev__location">Based in Florida, USA</p>
+                            <p class="dev__title"> <?php echo $developer->bio ?></p>
+                            <p class="dev__location"><?php echo $developer->location ?></p>
                             <ul class="dev__social">
-                                <li>
-                                    <a title="Github" href="#" target="_blank"><i class="im im-github"></i></a>
-                                </li>
-                                <li>
-                                    <a title="Stackoverflow" href="#" target="_blank"><i class="im im-stackoverflow"></i></a>
-                                </li>
-                                <li>
-                                    <a title="Twitter" href="#" target="_blank"><i class="im im-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a title="LinkedIn" href="#" target="_blank"><i class="im im-linkedin"></i></a>
-                                </li>
-                                <li>
-                                    <a title="Personal Website" href="#" target="_blank"><i class="im im-globe"></i></a>
-                                </li>
+                                <?php if ($developer->github) { ?>
+                                    <li>
+                                        <a title="Github" href="<?php echo $developer->github ?>" target="_blank"><i class="im im-github"></i></a>
+                                    </li>
+                                <?php } ?>
+                                <?php if ($developer->linkedin) { ?>
+                                    <li>
+                                        <a title="LinkedIn" href="<?php echo $developer->github ?>" target="_blank"><i class="im im-linkedin"></i></a>
+                                    </li>
+                                <?php } ?>
+
+
                             </ul>
                             <a href="#" class="btn btn--sub btn--lg">Send Message </a>
                         </div>
@@ -43,12 +40,7 @@
                     <div class="devInfo">
                         <h3 class="devInfo__title">About Me</h3>
                         <p class="devInfo__about">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex illum ipsum iusto consequatur. Totam,
-                            dolorum fugiat, debitis facere illo nostrum nesciunt maxime, deserunt enim voluptatibus modi natus velit
-                            voluptatum. Dicta eritatis exercitationem ut quos a placeat obcaecati? Architecto illum!
-                            <br />
-                            Amet consectetur adipisicing elit. Veritatis exercitationem ut quos a placeat obcaecati? Architecto
-                            illum, atque delectus nemo dolorem inventore ab facilis? Dolor placeat vel delectus ipsam ullam.
+                            <?php echo $developer->description ?>
                         </p>
                     </div>
                     <div class="settings">

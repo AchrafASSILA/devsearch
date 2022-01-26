@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION["username"])) { ?>
+if (isset($_SESSION["username_admin"])) { ?>
   <?php require_once "./includes/header.php"  ?>
   <!-- start main  -->
   <div class="main">
@@ -12,7 +12,7 @@ if (isset($_SESSION["username"])) { ?>
         <input type="text" placeholder="Search Here" name="search" id="" />
       </div>
       <div class="user">
-        <img src="./public/images/user.jpg" width="150px" alt="" />
+        <img src="./static/images/user.jpg" width="150px" alt="" />
       </div>
     </div>
     <!-- start cards  -->

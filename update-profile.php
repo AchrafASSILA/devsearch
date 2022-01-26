@@ -19,12 +19,12 @@ if (isset($_SESSION["username"])) {
         $image_error = $_FILES["image"]["error"];
         $image_size = $_FILES["image"]["size"];
         $inputs = array($first_name, $last_name, $bio, $description);
-        echo $description;
         if (isInputsEmpty($inputs)) {
             header("Location:/php_devsearch/update-profile.php?error_empty=empty inputs");
             exit();
         }
         updateProfile($db, $first_name, $last_name, $email, $bio, $description, $github, $linkedin, $location, $image_name, $image_tmp, $image_size, $image_error);
+        header("Location:/php_devsearch/account.php");
     }
 ?>
     <!-- Main Section -->

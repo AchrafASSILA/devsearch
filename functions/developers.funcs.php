@@ -47,13 +47,18 @@ function updateProfile($db, $first_name, $last_name, $email, $bio, $description,
 {
     $username = $_SESSION["username"];
     $image_location = "./static/images/profiles/" . $image_name;
-    if ($image_error === 0) {
-        if ($image_size < 500000) {
-            if (move_uploaded_file($image_tmp, $image_location)) {
-                $sql = "UPDATE developers SET bio = :bio, description = :description , image = :image WHERE username =:username ";
-                $statement = $db->prepare($sql);
-                $statement->execute([":bio" => $bio, ":description" => $description, ":image" => $image_location, ":username" => $username]);
+    if ($image_name) {
+        if ($image_error === 0) {
+            if ($image_size < 500000) {
+                if (move_uploaded_file($image_tmp, $image_location)) {
+                    $sql = "UPDATE developers SET bio = :bio, description = :description , image = :image WHERE username =:username ";
+                    $statement = $db->prepare($sql);
+                    $statement->execute([":bio" => $bio, ":description" => $description, ":image" => $image_location, ":username" => $username]);
+                }
             }
         }
     }
+    $sql = "UPDATE developers SET bio = :bio, description = :description  WHERE username =:username ";
+    $statement = $db->prepare($sql);
+    $statement->execute([":bio" => $bio, ":description" => $description, ":username" => $username]);
 }

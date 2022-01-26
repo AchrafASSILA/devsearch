@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./public/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./static/images/favicon.ico" type="image/x-icon" />
     <!-- Icon - IconMonster -->
     <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css" />
     <!-- Mumble UI -->
-    <link rel="stylesheet" href="./public/uikit/styles/uikit.css" />
+    <link rel="stylesheet" href="./static/uikit/styles/uikit.css" />
     <!-- Dev Search UI -->
-    <link rel="stylesheet" href="./public/styles/app.css" />
+    <link rel="stylesheet" href="./static/styles/app.css" />
 
     <title>DevSearch - Connect with Developers!</title>
 </head>
@@ -24,7 +24,7 @@
     <header class="header">
         <div class="container container--narrow">
             <a href="<?php echo 'http://localhost:8000/php_devsearch' ?>" class="header__logo">
-                <img src="./public/images/logo.svg" alt="DevSearch Logo" />
+                <img src="./static/images/logo.svg" alt="DevSearch Logo" />
             </a>
             <nav class="header__nav">
                 <input type="checkbox" id="responsive-menu" />
