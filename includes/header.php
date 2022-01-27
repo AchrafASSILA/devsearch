@@ -36,7 +36,7 @@
                     <li class="header__menuItem"><a href="<?php echo 'http://localhost:8000/php_devsearch' ?>">Developers</a></li>
                     <li class="header__menuItem"><a href="<?php echo "./projects.php" ?>">Projects</a></li>
                     <?php if (isset($_SESSION["username"])) { ?>
-                        <li class="header__menuItem"><a href="inbox.html">Inbox</a></li>
+                        <li class="header__menuItem"><a href="<?php echo './message.php' ?>">Inbox</a></li>
                         <li class="header__menuItem"><a href="<?php echo "./account.php" ?>">My Account</a></li>
                         <li class="header__menuItem"><a href="<?php echo "./logout.php" ?>" class="btn btn--sub">Logout</a></li>
 
