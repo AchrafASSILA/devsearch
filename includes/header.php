@@ -34,7 +34,7 @@
                 </label>
                 <ul class="header__menu">
                     <li class="header__menuItem"><a href="<?php echo 'http://localhost:8000/php_devsearch' ?>">Developers</a></li>
-                    <li class="header__menuItem"><a href="projects.html">Projects</a></li>
+                    <li class="header__menuItem"><a href="<?php echo "./projects.php" ?>">Projects</a></li>
                     <?php if (isset($_SESSION["username"])) { ?>
                         <li class="header__menuItem"><a href="inbox.html">Inbox</a></li>
                         <li class="header__menuItem"><a href="<?php echo "./account.php" ?>">My Account</a></li>
@@ -42,7 +42,7 @@
 
                     <?php } else {
                     ?>
-                        <li class="header__menuItem"><a href="<?php echo "./sign-up.php" ?>" class="btn btn--sub">Login/Sign Up</a></li>
+                        <li class="header__menuItem"><a href="<?php echo "./login.php" ?>" class="btn btn--sub">Login/Sign Up</a></li>
                     <?php } ?>
                 </ul>
             </nav>
