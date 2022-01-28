@@ -33,3 +33,12 @@ function getProject($db, $id)
     $project = $statement->fetch(PDO::FETCH_OBJ);
     return $project;
 }
+function getDeveloperProjects($db, $owner)
+{
+    $projects = "";
+    $sql = "SELECT * FROM projects WHERE owner = :owner";
+    $statement = $db->prepare($sql);
+    $statement->execute([":owner" => $owner]);
+    $projects = $statement->fetchAll(PDO::FETCH_OBJ);
+    return $projects;
+}

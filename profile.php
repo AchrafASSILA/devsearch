@@ -6,10 +6,12 @@ if (!isset($_GET["id"]) || empty(($_GET["id"]))) {
 }
 ?>
 <?php require_once './functions/developers.funcs.php';
+require_once './functions/projects.funcs.php';
 $id = filter_var($_GET["id"], FILTER_SANITIZE_NUMBER_INT);
 $developer = getDeveloper($db, $id);
 if ($developer) {
     $skills = getDeveloperSkills($db, $id);
+    $projects = getDeveloperProjects($db, $id);
 ?>
     <!-- Main Section -->
     <main class="profile my-md">
@@ -91,87 +93,35 @@ if ($developer) {
                 <div class="devInfo">
                     <h3 class="devInfo__title">Projects</h3>
                     <div class="grid grid--two">
-
-                        <div class="column">
-                            <div class="card project">
-                                <a href="single-project.html" class="project">
-                                    <img class="project__thumbnail" src="images/project-b.png" alt="project thumbnail" />
-                                    <div class="card__body">
-                                        <h3 class="project__title">DevSearch UI Design</h3>
-                                        <p><a class="project__author" href="profile.html">By Shahriar P. Shuvo</a></p>
-                                        <p class="project--rating">
-                                            <span style="font-weight: bold;">92%</span> Postitive
-                                            Feedback (62 Votes)
-                                        </p>
-                                        <div class="project__tags">
-                                            <span class="tag tag--pill tag--main">
-                                                <small>NextJS</small>
-                                            </span>
-                                            <span class="tag tag--pill tag--main">
-                                                <small>GraphQL</small>
-                                            </span>
-                                            <span class="tag tag--pill tag--main">
-                                                <small>TypeScript</small>
-                                            </span>
+                        <?php foreach ($projects as $project) : ?>
+                            <div class="column">
+                                <div class="card project">
+                                    <a href="single-project.html" class="project">
+                                        <img class="project__thumbnail" src="<?php echo $project->image ?>" alt="project thumbnail" />
+                                        <div class="card__body">
+                                            <h3 class="project__title"><?php echo $project->title ?></h3>
+                                            <p><a class="project__author" href="profile.php?id=<?php echo $developer->id ?>"><?php echo $developer->first_name . " " . $developer->last_name ?></a></p>
+                                            <p class="project--rating">
+                                                <span style="font-weight: bold;">92%</span> Postitive
+                                                Feedback (62 Votes)
+                                            </p>
+                                            <div class="project__tags">
+                                                <span class="tag tag--pill tag--main">
+                                                    <small>NextJS</small>
+                                                </span>
+                                                <span class="tag tag--pill tag--main">
+                                                    <small>GraphQL</small>
+                                                </span>
+                                                <span class="tag tag--pill tag--main">
+                                                    <small>TypeScript</small>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                                    </a>
+                                </div>
 
-                        <div class="column">
-                            <div class="card project">
-                                <a href="single-project.html" class="project">
-                                    <img class="project__thumbnail" src="images/project-c.png" alt="project thumbnail" />
-                                    <div class="card__body">
-                                        <h3 class="project__title">Another Landing Page</h3>
-                                        <p><a class="project__author" href="profile.html">By Dennis Ivanov</a></p>
-                                        <p class="project--rating">
-                                            <span style="font-weight: bold;">36%</span> Postitive
-                                            Feedback (18 Votes)
-                                        </p>
-                                        <div class="project__tags">
-                                            <span class="tag tag--pill tag--main">
-                                                <small>NextJS</small>
-                                            </span>
-                                            <span class="tag tag--pill tag--main">
-                                                <small>GraphQL</small>
-                                            </span>
-                                            <span class="tag tag--pill tag--main">
-                                                <small>TypeScript</small>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
                             </div>
-                        </div>
-
-                        <div class="column">
-                            <div class="card project">
-                                <a href="single-project.html" class="project">
-                                    <img class="project__thumbnail" src="images/project-a.png" alt="project thumbnail" />
-                                    <div class="card__body">
-                                        <h3 class="project__title">Yoga Studio Landing Page Website and Design</h3>
-                                        <p><a class="project__author" href="profile.html">By Dennis Ivanov</a></p>
-                                        <p class="project--rating">
-                                            <span style="font-weight: bold;">98%</span> Postitive
-                                            Feedback (72 Votes)
-                                        </p>
-                                        <div class="project__tags">
-                                            <span class="tag tag--pill tag--main">
-                                                <small>NextJS</small>
-                                            </span>
-                                            <span class="tag tag--pill tag--main">
-                                                <small>GraphQL</small>
-                                            </span>
-                                            <span class="tag tag--pill tag--main">
-                                                <small>TypeScript</small>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
 
                     </div>
                 </div>

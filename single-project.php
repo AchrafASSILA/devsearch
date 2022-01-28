@@ -57,16 +57,7 @@ if ($project) {
                     <h2 class="singleProject__title"><?php echo $project->title ?></h2>
                     <h3 class="singleProject__subtitle">About the Project</h3>
                     <div class="singleProject__info">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima harum maxime debitis amet voluptates esse
-                        a perferendis tempora, natus pariatur obcaecati odit quisquam fugit deserunt.
-
-                        <br />
-                        <br />
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptates earum possimus a perferendis culpa
-                        omnis, libero quae soluta, obcaecati amet. Quam earum ad qui reprehenderit eligendi porro ab possimus
-                        fugit voluptatem rerum eius sapiente, nemo mollitia aperiam suscipit culpa corrupti officiis dicta soluta
-                        ut similique! Iste soluta quae tempora alias assumenda? Nam nesciunt nihil enim tempore cum quo
-                        architecto?
+                        <?php echo $project->description ?>
                     </div>
 
                     <div class="comments">

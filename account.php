@@ -3,10 +3,12 @@
 <?php if (isset($_SESSION["username"])) { ?>
     <!-- Main Section -->
     <?php require_once './functions/developers.funcs.php';
+    require_once './functions/projects.funcs.php';
     $username = $_SESSION["username"];
     $id = $_SESSION["id"];
     $developer = getDeveloperSession($db, $username);
     $skills = getDeveloperSkills($db, $id);
+    $projects = getDeveloperProjects($db, $id);
     ?>
     <main class="settingsPage profile my-md">
         <div class="container">
@@ -69,61 +71,28 @@
 
                     <div class="settings">
                         <h3 class="settings__title">Projects</h3>
-                        <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="im im-plus"></i> Add Project</a>
+                        <a class="tag tag--pill tag--sub settings__btn tag--lg" href="./create-project.php"><i class="im im-plus"></i> Add Project</a>
                     </div>
 
                     <table class="settings__table">
-                        <tr>
-                            <td class="settings__thumbnail">
-                                <a href="single-project.html"><img src="images/project-a.png" alt="Project Thumbnail" /></a>
-                            </td>
-                            <td class="settings__tableInfo">
-                                <a href="single-project.html">Yoga Studio Landing Page</a>
-                                <p>
-                                    Consectetur adipisicing elit. Natus nam dolore aut sed vitae eos architecto unde tempore
-                                    exercitationem fugiat?...
-                                </p>
-                            </td>
-                            <td class="settings__tableActions">
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                                    Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="settings__thumbnail">
-                                <a href="single-project.html"><img src="images/project-b.png" alt="Project Thumbnail" /></a>
-                            </td>
-                            <td class="settings__tableInfo">
-                                <a href="single-project.html">DevSearch Website UI Design</a>
-                                <p>
-                                    Consectetur adipisicing elit. Natus nam dolore aut sed vitae eos architecto unde tempore
-                                    exercitationem fugiat?...
-                                </p>
-                            </td>
-                            <td class="settings__tableActions">
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                                    Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="settings__thumbnail">
-                                <a href="single-project.html"><img src="images/project-a.png" alt="Project Thumbnail" /></a>
-                            </td>
-                            <td class="settings__tableInfo">
-                                <a href="single-project.html">Portfolio Website Design</a>
-                                <p>
-                                    Consectetur adipisicing elit. Natus nam dolore aut sed vitae eos architecto unde tempore
-                                    exercitationem fugiat?...
-                                </p>
-                            </td>
-                            <td class="settings__tableActions">
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                                    Delete</a>
-                            </td>
-                        </tr>
+                        <?php foreach ($projects as $project) : ?>
+                            <tr>
+                                <td class="settings__thumbnail">
+                                    <a href="single-project.html"><img src="<?php echo $project->image ?>" alt="Project Thumbnail" /></a>
+                                </td>
+                                <td class="settings__tableInfo">
+                                    <a href="single-project.html"><?php echo $project->title ?></a>
+                                    <p>
+                                        <?php echo $project->description ?>
+                                    </p>
+                                </td>
+                                <td class="settings__tableActions">
+                                    <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
+                                    <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
+                                        Delete</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </table>
                 </div>
             </div>
