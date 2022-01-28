@@ -1,7 +1,7 @@
 <?php require_once './includes/header.php'; ?>
 <?php require_once './functions/developers.funcs.php'; ?>
 <?php require_once './db/db.php'; ?>
-
+<?php require_once './functions/form.validation.php'; ?>
 <?php
 if (isset($_SESSION["username"])) {
     $username = $_SESSION["username"];
@@ -23,6 +23,10 @@ if (isset($_SESSION["username"])) {
         $inputs = array($first_name, $last_name, $bio, $description);
         if (isInputsEmpty($inputs)) {
             header("Location:/php_devsearch/update-profile.php?error_empty=empty inputs");
+            exit();
+        }
+        if (invalidEmail($email)) {
+            header("Location:/php_devsearch/update-profile.php?erroremail=invalid email");
             exit();
         }
         updateProfile($db, $first_name, $last_name, $email, $bio, $description, $github, $linkedin, $location, $image_name, $image_tmp, $image_size, $image_error);
@@ -81,6 +85,11 @@ if (isset($_SESSION["username"])) {
                     <?php if (isset($_GET["error_empty"]) && !(empty($_GET["error_empty"]))) { ?>
 
                         <span style="display:block;font-weight: bold;color:red;text-align:center;disp"><?php echo $_GET["error_empty"] ?></span>
+
+                    <?php } ?>
+                    <?php if (isset($_GET["erroremail"]) && !(empty($_GET["erroremail"]))) { ?>
+
+                        <span style="display:block;font-weight: bold;color:red;text-align:center;disp"><?php echo $_GET["erroremail"] ?></span>
 
                     <?php } ?>
                     <input class="btn btn--sub btn--lg  my-md" type="submit" name="submit" value="Submit" />

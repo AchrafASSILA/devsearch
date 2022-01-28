@@ -8,8 +8,8 @@ if (!isset($_GET["id"]) || empty(($_GET["id"]))) {
 <?php require_once './functions/developers.funcs.php';
 $id = filter_var($_GET["id"], FILTER_SANITIZE_NUMBER_INT);
 $project = getProject($db, $id);
-$owner = getDeveloperName($db, $project->owner);
 if ($project) {
+    $owner = getDeveloperName($db, $project->owner);
 ?>
     <!-- Main Section -->
     <main class="singleProject my-md">
@@ -116,4 +116,6 @@ if ($project) {
         </div>
         </div>
     </main>
-<?php } ?>
+<?php } else {
+    header('Location:/php_devsearch/projects.php');
+} ?>

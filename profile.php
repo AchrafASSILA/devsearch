@@ -180,5 +180,7 @@ if ($developer) {
         </div>
 
     </main>
-<?php }  ?>
+<?php } else {
+    header('Location:/php_devsearch/index.php');
+} ?>
 <?php require_once './includes/footer.php'; ?>

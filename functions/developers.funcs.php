@@ -33,14 +33,7 @@ function getDeveloperSession($db, $username)
     $developer = $statement->fetch(PDO::FETCH_OBJ);
     return $developer;
 }
-function isInputsEmpty($inputs)
-{
-    foreach ($inputs as $input) {
-        if (empty($input)) {
-            return true;
-        }
-    }
-}
+
 
 
 function updateProfile($db, $first_name, $last_name, $email, $bio, $description, $github, $linkedin, $location, $image_name, $image_tmp, $image_size, $image_error)
@@ -91,4 +84,37 @@ function getDeveloperSkills($db, $owner)
     $statmenet->execute([":owner" => $owner]);
     $skills = $statmenet->fetchAll(PDO::FETCH_OBJ);
     return $skills;
+}
+
+
+function createSkill($db, $username, $id, $skill_name, $skill_desc)
+{
+    if ($username) {
+        $sql = 'INSERT skills(name,description,owner) VALUES(:name,:description,:owner)';
+        $statement = $db->prepare($sql);
+        $statement->execute([":name" => $skill_name, ":description" => $skill_desc, ":owner" => $id]);
+    }
+}
+
+
+function updateSkill($db, $username, $skill_id, $id, $skill_name, $skill_desc)
+{
+    if ($username) {
+        $sql = 'UPDATE skills set name = :name , description=:description  WHERE owner = :owner and id=:skill_id';
+        $statement = $db->prepare($sql);
+        $statement->execute([":name" => $skill_name, ":description" => $skill_desc, ":owner" => $id, ":skill_id" => $skill_id]);
+    }
+}
+
+
+function  getSkill($db, $username, $id)
+{
+    if ($username) {
+        $skill = "";
+        $sql = 'SELECT name , description FROM skills WHERE id = :id ';
+        $statement = $db->prepare($sql);
+        $statement->execute([":id" => $id]);
+        $skill = $statement->fetch(PDO::FETCH_OBJ);
+        return $skill;
+    }
 }

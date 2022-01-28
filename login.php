@@ -1,6 +1,7 @@
 <?php require_once './db/db.php'; ?>
 <?php require_once './functions/signup.funcs.php'; ?>
 <?php require_once './includes/header.php'; ?>
+<?php require_once './functions/form.validation.php'; ?>
 <?php
 if (isset($_POST["submit"])) {
     $username = $_POST["username"];
@@ -13,6 +14,7 @@ if (isset($_POST["submit"])) {
     if ($admin) {
         session_start();
         $_SESSION["username"] = $username;
+        $_SESSION["id"] = $admin->id;
         header("Location:/php_devsearch/index.php");
     } else {
         header("Location:/php_devsearch/login.php?error_none=username or password not correct");

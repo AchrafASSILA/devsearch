@@ -1,6 +1,7 @@
 <?php require_once './includes/header.php'; ?>
 <?php require_once './db/db.php'; ?>
 <?php require_once './functions/signup.funcs.php'; ?>
+<?php require_once './functions/form.validation.php'; ?>
 <?php
 if (isset($_POST["submit"])) {
     $first_name = $_POST["firstname"];

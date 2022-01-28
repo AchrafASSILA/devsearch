@@ -4,8 +4,9 @@
     <!-- Main Section -->
     <?php require_once './functions/developers.funcs.php';
     $username = $_SESSION["username"];
+    $id = $_SESSION["id"];
     $developer = getDeveloperSession($db, $username);
-
+    $skills = getDeveloperSkills($db, $id);
     ?>
     <main class="settingsPage profile my-md">
         <div class="container">
@@ -45,49 +46,25 @@
                     </div>
                     <div class="settings">
                         <h3 class="settings__title">Skills</h3>
-                        <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="im im-plus"></i> Add Skill</a>
+                        <a class="tag tag--pill tag--sub settings__btn tag--lg" href="<?php echo "./create-skill.php" ?>"><i class="im im-plus"></i> Add Skill</a>
                     </div>
 
                     <table class="settings__table">
-                        <tr>
-                            <td class="settings__tableInfo">
-                                <h4>JavaScript</h4>
-                                <p>
-                                    Consectetur adipisicing elit. Natus nam dolore aut sed vitae eos architecto unde tempore
-                                    exercitationem fugiat?...
-                                </p>
-                            </td>
-                            <td class="settings__tableActions">
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                                    Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="settings__tableInfo">
-                                <h4>Python</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, suscipit...</p>
-                            </td>
-                            <td class="settings__tableActions">
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                                    Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="settings__tableInfo">
-                                <h4>Django</h4>
-                                <p>
-                                    Amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
-                                    odio Est, suscipit...
-                                </p>
-                            </td>
-                            <td class="settings__tableActions">
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                                <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
-                                    Delete</a>
-                            </td>
-                        </tr>
+                        <?php foreach ($skills as $skill) : ?>
+                            <tr>
+                                <td class="settings__tableInfo">
+                                    <h4><?php echo $skill->name ?></h4>
+                                    <p>
+                                        <?php echo $skill->description ?>
+                                    </p>
+                                </td>
+                                <td class="settings__tableActions">
+                                    <a class="tag tag--pill tag--main settings__btn" href="./update-skill.php?id=<?php echo $skill->id ?>"><i class="im im-edit"></i> Edit</a>
+                                    <a class="tag tag--pill tag--main settings__btn" href="./delete-skill.php?id=<?php echo $skill->id ?>"><i class="im im-x-mark-circle-o"></i>
+                                        Delete</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </table>
 
                     <div class="settings">

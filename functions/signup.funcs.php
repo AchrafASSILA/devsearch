@@ -2,14 +2,6 @@
 
 
 
-function isInputsEmpty($inputs)
-{
-    foreach ($inputs as $input) {
-        if (empty($input)) {
-            return true;
-        }
-    }
-}
 
 function invalidUsername($username)
 {
@@ -17,14 +9,7 @@ function invalidUsername($username)
         return true;
     }
 }
-function invalidEmail($email)
-{
-    if ((filter_var($email, FILTER_VALIDATE_EMAIL))) {
-        return false;
-    } else {
-        return true;
-    }
-}
+
 function passwrodNotMatch($password, $confirm_password)
 {
     if ($password !== $confirm_password) {
@@ -36,7 +21,7 @@ function passwrodNotMatch($password, $confirm_password)
 function usernameExists($db, $username)
 {
     $admin = "";
-    $sql = 'SELECT username FROM developers WHERE username = :username';
+    $sql = 'SELECT username , id FROM developers WHERE username = :username';
     $statement = $db->prepare($sql);
     $statement->execute([":username" => $username]);
     $admin = $statement->fetch(PDO::FETCH_OBJ);
