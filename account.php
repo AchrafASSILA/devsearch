@@ -78,17 +78,17 @@
                         <?php foreach ($projects as $project) : ?>
                             <tr>
                                 <td class="settings__thumbnail">
-                                    <a href="single-project.html"><img src="<?php echo $project->image ?>" alt="Project Thumbnail" /></a>
+                                    <a href="single-project.php?id=<?php echo $project->id ?>"><img src="<?php echo $project->image ?>" alt="Project Thumbnail" /></a>
                                 </td>
                                 <td class="settings__tableInfo">
-                                    <a href="single-project.html"><?php echo $project->title ?></a>
+                                    <a href="single-project.php?id=<?php echo $project->id ?>"><?php echo $project->title ?></a>
                                     <p>
                                         <?php echo $project->description ?>
                                     </p>
                                 </td>
                                 <td class="settings__tableActions">
-                                    <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                                    <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>
+                                    <a class="tag tag--pill tag--main settings__btn" href="update-project.php?id=<?php echo $project->id ?>"><i class="im im-edit"></i> Edit</a>
+                                    <a onclick="return confirm('do you want to delete this project <?php echo $project->title ?>?')" class="tag tag--pill tag--main settings__btn" href="delete-project.php?id=<?php echo $project->id ?>"><i class="im im-x-mark-circle-o"></i>
                                         Delete</a>
                                 </td>
                             </tr>

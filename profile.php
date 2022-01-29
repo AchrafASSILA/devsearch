@@ -96,7 +96,7 @@ if ($developer) {
                         <?php foreach ($projects as $project) : ?>
                             <div class="column">
                                 <div class="card project">
-                                    <a href="single-project.html" class="project">
+                                    <a href="single-project.php?id=<?php echo $project->id ?>" class="project">
                                         <img class="project__thumbnail" src="<?php echo $project->image ?>" alt="project thumbnail" />
                                         <div class="card__body">
                                             <h3 class="project__title"><?php echo $project->title ?></h3>
