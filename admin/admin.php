@@ -2,6 +2,11 @@
 session_start();
 if (isset($_SESSION["username_admin"])) { ?>
   <?php require_once "./includes/header.php"  ?>
+  <?php require_once "../functions/developers.funcs.php"  ?>
+  <?php require_once "../functions/projects.funcs.php"  ?>
+  <?php require_once "../db/db.php"  ?>
+  <?php $developers = getDevelopers($db)  ?>
+  <?php $projects = getProjects($db) ?>
   <!-- start main  -->
   <div class="main">
     <div class="topbar">
@@ -19,7 +24,7 @@ if (isset($_SESSION["username_admin"])) { ?>
     <div class="card-box">
       <div class="card">
         <div>
-          <div class="numbers">1.504</div>
+          <div class="numbers"><?php echo count($developers) ?></div>
           <div class="card-name">Developers</div>
         </div>
         <div class="icon">
@@ -28,7 +33,7 @@ if (isset($_SESSION["username_admin"])) { ?>
       </div>
       <div class="card">
         <div>
-          <div class="numbers">400</div>
+          <div class="numbers"><?php echo count($projects) ?></div>
           <div class="card-name">Projects</div>
         </div>
         <div class="icon">
@@ -70,62 +75,22 @@ if (isset($_SESSION["username_admin"])) { ?>
               <td>LastName</td>
               <td>Email</td>
               <td>Location</td>
-              <td>Password</td>
-              <td>Github</td>
-              <td>Linkedin</td>
               <td>Bio</td>
               <td>Created</td>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Assila</td>
-              <td>Achraf</td>
-              <td>morroco,Casablanca</td>
-              <td>achraf@gmail.com</td>
-            </tr>
-            <tr>
-              <td>Assila</td>
-              <td>Achraf</td>
-              <td>morroco,Casablanca</td>
-              <td>achraf@gmail.com</td>
-            </tr>
-            <tr>
-              <td>Assila</td>
-              <td>Achraf</td>
-              <td>morroco,Casablanca</td>
-              <td>achraf@gmail.com</td>
-            </tr>
-            <tr>
-              <td>Assila</td>
-              <td>Achraf</td>
-              <td>morroco,Casablanca</td>
-              <td>achraf@gmail.com</td>
-            </tr>
-            <tr>
-              <td>Assila</td>
-              <td>Achraf</td>
-              <td>morroco,Casablanca</td>
-              <td>achraf@gmail.com</td>
-            </tr>
-            <tr>
-              <td>Assila</td>
-              <td>Achraf</td>
-              <td>morroco,Casablanca</td>
-              <td>achraf@gmail.com</td>
-            </tr>
-            <tr>
-              <td>Assila</td>
-              <td>Achraf</td>
-              <td>morroco,Casablanca</td>
-              <td>achraf@gmail.com</td>
-            </tr>
-            <tr>
-              <td>Assila</td>
-              <td>Achraf</td>
-              <td>morroco,Casablanca</td>
-              <td>achraf@gmail.com</td>
-            </tr>
+            <?php foreach ($developers as $developer) : ?>
+              <tr>
+                <td><img src="<?php echo "." . $developer->image ?>" style="width:80px;height:80px;border-radius:50%;object-fit:cover;" alt="alt"></td>
+                <td><?php echo $developer->first_name ?></td>
+                <td><?php echo $developer->last_name ?></td>
+                <td><?php echo $developer->email ?></td>
+                <td><?php echo $developer->location ?></td>
+                <td><?php echo $developer->bio ?></td>
+                <td><?php echo $developer->created ?></td>
+              </tr>
+            <?php endforeach; ?>
           </tbody>
         </table>
       </div>

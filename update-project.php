@@ -7,7 +7,9 @@ if (isset($_SESSION["username"])) {
 
     $username = $_SESSION["username"];
     $project_id = $_GET["id"];
+    $tags = getTags($db);
     $project = getProject($db, $project_id);
+    $projectTags =  getProjectTags($db, $project_id);
     if (isset($_POST["submit"])) {
         $owner = $_SESSION["id"];
         $title = $_POST["title"];
@@ -18,6 +20,7 @@ if (isset($_SESSION["username"])) {
         $image_tmp = $_FILES["image"]["tmp_name"];
         $image_error = $_FILES["image"]["error"];
         $image_size = $_FILES["image"]["size"];
+        $tag = $_POST['tag'];
         $inputs = array($title, $description);
         $image_location = "./static/images/projects/ " . $image_name;
         if (isInputsEmpty($inputs)) {
@@ -25,6 +28,8 @@ if (isset($_SESSION["username"])) {
             exit();
         }
         updateProject($db, $owner, $project_id, $username, $title, $description, $demo_link, $source_link, $image_name, $image_tmp, $image_size, $image_error, $image_location);
+        $project =  getLastProjectId($db);
+
         header("Location:/php_devsearch/account.php");
     }
 
@@ -59,6 +64,12 @@ if (isset($_SESSION["username"])) {
                     <div class="form__field">
                         <label for="source_link">Source Link: </label>
                         <input class="input input--text" id="source_link" value="<?php echo $project->source_code ?>" type="text" name="source_link" placeholder="Enter source code" />
+                    </div>
+                    <div class="form__field">
+                        <label for="Tags">Tags: </label>
+                        <?php foreach ($tags as $tag) : ?>
+                            <input type="checkbox" name="tag[]" id="tag" value="<?php echo $tag->id ?>"> <?php echo $tag->name ?> <br>
+                        <?php endforeach; ?>
                     </div>
                     <?php if (isset($_GET["error_empty"]) && !(empty($_GET["error_empty"]))) { ?>
 

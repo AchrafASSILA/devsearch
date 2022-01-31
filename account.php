@@ -35,7 +35,7 @@
 
 
                             </ul>
-                            <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+
                         </div>
                     </div>
                 </div>

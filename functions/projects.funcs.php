@@ -126,3 +126,14 @@ function getTags($db)
     $tags = $statement->fetchAll(PDO::FETCH_OBJ);
     return $tags;
 }
+
+function updateProjectTags($db, $username, $owner, $tags)
+{
+    if ($username) {
+        foreach ($tags as $tag) {
+            $sql = 'INSERT INTO projecttags(project,tag) VALUES(:project,:tag)';
+            $statement = $db->prepare($sql);
+            $statement->execute([":project" => $owner, ":tag" => $tag]);
+        }
+    }
+}

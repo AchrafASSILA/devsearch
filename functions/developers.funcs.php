@@ -61,7 +61,7 @@ function updateProfile($db, $first_name, $last_name, $email, $bio, $description,
             }
         }
     }
-    $sql = "UPDATE developers SET first_name = :first_name , last_name = :last_name, email = :email,  github=:github,linkedin=:linkedin ,  bio = :bio, description = :description  WHERE username =:username ";
+    $sql = "UPDATE developers SET first_name = :first_name , last_name = :last_name, email = :email,  github=:github,linkedin=:linkedin , location=:location, bio = :bio, description = :description  WHERE username =:username ";
     $statement = $db->prepare($sql);
     $statement->execute([
         ":first_name" => $first_name,
@@ -69,6 +69,7 @@ function updateProfile($db, $first_name, $last_name, $email, $bio, $description,
         ":email" => $email,
         ":github" => $github,
         ":linkedin" => $linkedin,
+        ":location" => $location,
         ":bio" => $bio,
         ":description" => $description,
         ":username" => $username
