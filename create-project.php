@@ -3,6 +3,7 @@ require_once './functions/form.validation.php';
 require_once './functions/projects.funcs.php';
 require_once './db/db.php';
 if (isset($_SESSION["username"])) {
+    $tags = getTags($db);
     if (isset($_POST["submit"])) {
         $owner = $_SESSION["id"];
         $username = $_SESSION["username"];
@@ -14,6 +15,7 @@ if (isset($_SESSION["username"])) {
         $image_tmp = $_FILES["image"]["tmp_name"];
         $image_error = $_FILES["image"]["error"];
         $image_size = $_FILES["image"]["size"];
+        $tag = $_POST['tag'];
         $inputs = array($title, $description);
         $image_location = "./static/images/projects/ " . $image_name;
         if (isInputsEmpty($inputs)) {
@@ -21,6 +23,8 @@ if (isset($_SESSION["username"])) {
             exit();
         }
         createProject($db, $owner, $username, $title, $description, $demo_link, $source_link, $image_name, $image_tmp, $image_size, $image_error, $image_location);
+        $project =  getLastProjectId($db);
+        createProjectTags($db, $username, $project, $tag);
         header('Location: ./account.php');
     }
 ?>
@@ -53,6 +57,13 @@ if (isset($_SESSION["username"])) {
                     <div class="form__field">
                         <label for="source_link">Source Link: </label>
                         <input class="input input--text" id="source_link" type="text" name="source_link" placeholder="Enter source code" />
+                    </div>
+                    <div class="form__field">
+                        <label for="Tags">Tags: </label>
+                        <?php foreach ($tags as $tag) : ?>
+                            <input type="checkbox" name="tag[]" id="tag" value="<?php echo $tag->id ?>"> <?php echo $tag->name ?> <br>
+
+                        <?php endforeach; ?>
                     </div>
                     <?php if (isset($_GET["error_empty"]) && !(empty($_GET["error_empty"]))) { ?>
 

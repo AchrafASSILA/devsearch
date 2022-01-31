@@ -33,6 +33,15 @@ function getProject($db, $id)
     $project = $statement->fetch(PDO::FETCH_OBJ);
     return $project;
 }
+function getLastProjectId($db)
+{
+    $project = "";
+    $sql = 'SELECT id FROM projects ORDER BY id DESC LIMIT 1;';
+    $statement = $db->prepare($sql);
+    $statement->execute([]);
+    $project = $statement->fetch(PDO::FETCH_OBJ);
+    return $project->id;
+}
 function getDeveloperProjects($db, $owner)
 {
     $projects = "";
@@ -64,7 +73,16 @@ function createProject($db, $owner, $username, $title, $description, $demo_link,
         $statement->execute([":title" => $title, ":description" => $description, ":demo_link" => $demo_link, ":source_code" => $source_link, ":created" => date('y-m-d'), ":owner" => $owner]);
     }
 }
-
+function createProjectTags($db, $username, $owner, $tags)
+{
+    if ($username) {
+        foreach ($tags as $tag) {
+            $sql = 'INSERT INTO projecttags(project,tag) VALUES(:project,:tag)';
+            $statement = $db->prepare($sql);
+            $statement->execute([":project" => $owner, ":tag" => $tag]);
+        }
+    }
+}
 function updateProject($db, $owner, $id, $username, $title, $description, $demo_link, $source_link, $image_name, $image_tmp, $image_size, $image_error, $image_location)
 {
     if ($image_name) {
@@ -83,4 +101,28 @@ function updateProject($db, $owner, $id, $username, $title, $description, $demo_
         $statement = $db->prepare($sql);
         $statement->execute([":title" => $title, ":description" => $description, ":demo_link" => $demo_link, ":source_code" => $source_link, ":id" => $id, ":owner" => $owner]);
     }
+}
+
+
+function getProjectTags($db, $id)
+{
+
+    $tags = "";
+    $sql = "SELECT name FROM tags inner join projecttags on tag = tags.id WHERE project = :project";
+    $statement = $db->prepare($sql);
+    $statement->execute([":project" => $id]);
+    $tags = $statement->fetchAll(PDO::FETCH_OBJ);
+    return $tags;
+}
+
+
+function getTags($db)
+{
+
+    $tags = "";
+    $sql = "SELECT * FROM tags";
+    $statement = $db->prepare($sql);
+    $statement->execute([]);
+    $tags = $statement->fetchAll(PDO::FETCH_OBJ);
+    return $tags;
 }

@@ -29,6 +29,7 @@
                 <?php foreach ($projects as $project) : ?>
                     <?php $id = $project->owner ?>
                     <?php $owner = getDeveloperName($db, $id) ?>
+                    <?php $tags = getProjectTags($db, $project->id) ?>
                     <div class="column">
                         <div class="card project">
                             <a href="<?php echo "./single-project.php?id=" . $project->id ?>" class="project">
@@ -41,15 +42,11 @@
                                         Feedback (72 Votes)
                                     </p>
                                     <div class="project__tags">
-                                        <span class="tag tag--pill tag--main">
-                                            <small>NextJS</small>
-                                        </span>
-                                        <span class="tag tag--pill tag--main">
-                                            <small>GraphQL</small>
-                                        </span>
-                                        <span class="tag tag--pill tag--main">
-                                            <small>TypeScript</small>
-                                        </span>
+                                        <?php foreach ($tags as $tag) : ?>
+                                            <span class="tag tag--pill tag--main">
+                                                <small><?php echo $tag->name ?></small>
+                                            </span>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                             </a>

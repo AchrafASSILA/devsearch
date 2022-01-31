@@ -10,6 +10,7 @@ $id = filter_var($_GET["id"], FILTER_SANITIZE_NUMBER_INT);
 $project = getProject($db, $id);
 if ($project) {
     $owner = getDeveloperName($db, $project->owner);
+    $tags = getProjectTags($db, $id);
 ?>
     <!-- Main Section -->
     <main class="singleProject my-md">
@@ -18,33 +19,11 @@ if ($project) {
                 <div class="column column--1of3">
                     <h3 class="singleProject__subtitle">Tools & Stacks</h3>
                     <div class="singleProject__toolStack">
-                        <span class="tag tag--pill tag--sub tag--lg">
-                            <small>Figma</small>
-                        </span>
-                        <span class="tag tag--pill tag--sub tag--lg">
-                            <small>React Js</small>
-                        </span>
-                        <span class="tag tag--pill tag--sub tag--lg">
-                            <small>REST API</small>
-                        </span>
-                        <span class="tag tag--pill tag--sub tag--lg">
-                            <small>GraphQL</small>
-                        </span>
-                        <span class="tag tag--pill tag--sub tag--lg">
-                            <small>TypeScript</small>
-                        </span>
-                        <span class="tag tag--pill tag--sub tag--lg">
-                            <small>Webpack</small>
-                        </span>
-                        <span class="tag tag--pill tag--sub tag--lg">
-                            <small>NextJS</small>
-                        </span>
-                        <span class="tag tag--pill tag--sub tag--lg">
-                            <small>Postgres</small>
-                        </span>
-                        <span class="tag tag--pill tag--sub tag--lg">
-                            <small>MongoDB</small>
-                        </span>
+                        <?php foreach ($tags as $tag) : ?>
+                            <span class="tag tag--pill tag--sub tag--lg">
+                                <small><?php echo $tag->name ?></small>
+                            </span>
+                        <?php endforeach; ?>
                     </div>
                     <?php if ($project->source_code) { ?>
                         <a class="singleProject__liveLink" href="#" target="_blank"><i class="im im-external-link"></i>Source Code
