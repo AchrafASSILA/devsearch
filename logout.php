@@ -4,6 +4,7 @@
 session_start();
 // session_unset();
 unset($_SESSION['username']);
+unset($_SESSION['id']);
 
 // session_destroy();
-header("Location:/php_devsearch/login.php");
+header("Location:/devsearch/login.php");

@@ -23,7 +23,7 @@
     <!-- Header Section -->
     <header class="header">
         <div class="container container--narrow">
-            <a href="<?php echo 'http://localhost:8000/php_devsearch' ?>" class="header__logo">
+            <a href="<?php echo './' ?>" class="header__logo">
                 <img src="./static/images/logo.svg" alt="DevSearch Logo" />
             </a>
             <nav class="header__nav">
@@ -33,10 +33,10 @@
                     <div class="toggle-menu__lines"></div>
                 </label>
                 <ul class="header__menu">
-                    <li class="header__menuItem"><a href="<?php echo 'http://localhost:8000/php_devsearch' ?>">Developers</a></li>
+                    <li class="header__menuItem"><a href="<?php echo './' ?>">Developers</a></li>
                     <li class="header__menuItem"><a href="<?php echo "./projects.php" ?>">Projects</a></li>
                     <?php if (isset($_SESSION["username"])) { ?>
-                        <li class="header__menuItem"><a href="<?php echo './message.php' ?>">Inbox</a></li>
+                        <li class="header__menuItem"><a href="<?php echo './inbox.php' ?>">Inbox</a></li>
                         <li class="header__menuItem"><a href="<?php echo "./account.php" ?>">My Account</a></li>
                         <li class="header__menuItem"><a href="<?php echo "./logout.php" ?>" class="btn btn--sub">Logout</a></li>
 

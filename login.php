@@ -7,7 +7,7 @@ if (isset($_POST["submit"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
     if (isInputsEmpty([$username, $password])) {
-        header("Location:/php_devsearch/login.php?error_empty=empty inputs");
+        header("Location:/devsearch/login.php?error_empty=empty inputs");
         exit();
     }
     $admin = usernameExists($db, $username);
@@ -15,16 +15,16 @@ if (isset($_POST["submit"])) {
         session_start();
         $_SESSION["username"] = $username;
         $_SESSION["id"] = $admin->id;
-        header("Location:/php_devsearch/index.php");
+        header("Location:/devsearch/index.php");
     } else {
-        header("Location:/php_devsearch/login.php?error_none=username or password not correct");
+        header("Location:/devsearch/login.php?error_none=username or password not correct");
         exit();
     }
 }
 ?>
 <?php
 if (isset($_SESSION["username"])) {
-    header("Location:/php_devsearch/index.php");
+    header("Location:/devsearch/index.php");
 ?>
 <?php } else {
 ?>

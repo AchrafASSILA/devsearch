@@ -8,6 +8,10 @@ if (!isset($_GET["id"]) || empty(($_GET["id"]))) {
 <?php require_once './functions/developers.funcs.php';
 require_once './functions/projects.funcs.php';
 $id = filter_var($_GET["id"], FILTER_SANITIZE_NUMBER_INT);
+$session_id = '';
+if (isset($_SESSION["id"])) {
+    $session_id = $_SESSION["id"];
+}
 $developer = getDeveloper($db, $id);
 if ($developer) {
     $skills = getDeveloperSkills($db, $id);
@@ -36,7 +40,10 @@ if ($developer) {
                                     </li>
                                 <?php } ?>
                             </ul>
-                            <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+                            <?php if ($session_id != $id) { ?>
+                                <a href="send-message.php?id=<?php echo $id ?>" class="btn btn--sub btn--lg">Send Message </a>
+                            <?php }  ?>
+
                         </div>
                     </div>
                 </div>

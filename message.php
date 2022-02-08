@@ -1,23 +1,25 @@
 <?php require_once "./includes/header.php" ?>
-<?php require_once "./functions/projects.funcs.php" ?>
+<?php require_once "./functions/developers.funcs.php" ?>
 <?php require_once "./db/db.php" ?>
 <!-- Main Section -->
-<main class="messagePage my-xl">
-    <div class="content-box">
-        <div class="message">
-            <a class="backButton" href="inbox.html"><i class="im im-angle-left"></i></a>
-            <h2 class="message__subject">Working Opportunity for Web Design Company</h4>
-                <a href="profile.html" class="message__author">Dennis Ivanov</a>
-                <p class="message__date">May 31, 2021, 04:37 PM</p>
-                <div class="message__body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, ea? Facere minus vel nam, quas nisi dolore
-                    possimus tempora commodi. Praesentium nisi totam quas pariatur culpa nostrum dolore, nemo voluptatem!
-                    <br /><br />
-                    Voluptate dolores veniam ducimus cumque, harum fuga quaerat, culpa distinctio voluptas magnam a unde
-                    reiciendis similique necessitatibus obcaecati voluptatibus deserunt voluptatum numquam ullam in ipsum, ea
-                    aperiam. Dolorum rerum pariatur quaerat. Debitis tempora aliquid libero alias aperiam illo fuga ipsum magni
-                    quia.
-                </div>
+<?php if ($_SESSION['username']) {
+    $id = $_GET['id'];
+    $message = getMessage($db, $id);
+    updateMessage($db, $id);
+
+?>
+    <main class="messagePage my-xl">
+        <div class="content-box">
+            <div class="message">
+                <a class="backButton" href="inbox.php"><i class="im im-angle-left"></i></a>
+                <h2 class="message__subject"><?php echo $message->subject ?></h4>
+                    <a href="profile.html" class="message__author"><?php echo $message->name ?></a>
+                    <p class="message__date"><?php echo $message->created ?> PM</p>
+                    <div class="message__body"><?php echo $message->body ?>
+                    </div>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
+<?php } else {
+    header('Location: ./login.php');
+} ?>
